@@ -1,0 +1,22 @@
+{
+  "bookList": [
+    {
+      "isbn": 1234567890,
+      "title": "Mock Title 1",
+      "author": "Mock Author 1",
+      "publisher": "Mock Publisher 1",
+      "year": "2022-01-01",
+      "copies": 5,
+      "img_url": "https://images-na.ssl-images-amazon.com/images/S/compressed.photo.goodreads.com/books/1666126585i/63035150.jpg"
+    },
+    {
+      "isbn": 1234567890,
+      "title": "Mock Title 2",
+      "author": "Mock Author 2",
+      "publisher": "Mock Publisher 2",
+      "year": "2022-01-01",
+      "copies": 3,
+      "img_url": "https://s.lubimyczytac.pl/upload/books/5043000/5043467/1026001-352x500.jpg"
+    }
+  ]
+}
