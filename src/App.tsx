@@ -1,25 +1,25 @@
-import React from 'react';
-import logo from './logo.svg';
 import './App.css';
+import LoginForm from './login-form/login-form';
+import { ThemeProvider, createTheme } from '@mui/material/styles';
+import CssBaseline from '@mui/material/CssBaseline';
+import DisplayBooksList from './book-display/book-display';
+import mock from './book-display/mock.json';
+const darkTheme = createTheme({
+  palette: {
+    mode: 'dark',
+  },
+});
+const bookList = mock.bookList.map((book) => ({
+  ...book,
+}));
 
 function App() {
+  console.log(bookList);
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <ThemeProvider theme={darkTheme}>
+      <CssBaseline />
+      <DisplayBooksList bookList={bookList} />
+    </ThemeProvider>
   );
 }
 
