@@ -1,0 +1,39 @@
+body {
+  display: flex;
+  justify-content: center;
+  
+  width: 100vw;
+  height: 100vh;
+  margin: 20px;
+  padding: 50px;
+}
+
+#cardView {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  width: 100% !important;
+  height: 100% !important;
+}
+
+#carouselView {
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  width: 100% !important;
+  height: 100% !important;
+  min-width: 500px;
+}
+
+#carouselView img {
+  width: 100%;
+  height: auto;
+  width: 200px;
+  height: 300px;
+}
+#Title {
+  font-family: abolition, sans-serif;
+    font-style: normal;
+    font-weight: 400;
+}
