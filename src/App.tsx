@@ -12,7 +12,8 @@ import { Register } from './login-form/register-form';
 import { UrlNotFound } from './pages/url-not-found';
 import { Loans } from './pages/loans';
 import { Comments } from './pages/comments';
-import { Landing } from './pages/landing';
+import { Home } from './pages/landing';
+
 const darkTheme = createTheme({
   palette: {
     mode: 'dark',
@@ -29,7 +30,7 @@ function App() {
       <CssBaseline />
       <MuiNavbar />
       <Routes>
-        <Route path="/" element={<About />} />
+        <Route path="/" element={<Home />} />
         <Route path="/About" element={<About />} />
         <Route path="/Login" element={<LoginForm />} />
         <Route path="/Register" element={<Register />} />
