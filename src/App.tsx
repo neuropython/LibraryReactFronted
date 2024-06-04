@@ -10,7 +10,7 @@ import { Contact } from './pages/conatact';
 import { LoginForm } from './login-form/login-form';
 import { Register } from './login-form/register-form';
 import { UrlNotFound } from './pages/url-not-found';
-import { Loans } from './pages/loans';
+import LoansControler from './pages/loans';
 import { Comments } from './pages/comments';
 import { Home } from './pages/landing';
 import { Me } from './pages/me';
@@ -32,7 +32,7 @@ function App() {
         <Route path="/Contact" element={<Contact />} />
 
         <Route path="/Books" element={<Book />} />
-        <Route path="/Loans" element={<Loans />} />
+        <Route path="/Loans" element={<LoansControler />} />
         <Route path="/Comments" element={<Comments />} />
         <Route path="/Me" element={<Me />} />
         <Route path="*" element={<UrlNotFound />} />
