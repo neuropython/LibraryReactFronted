@@ -1,4 +1,5 @@
 interface BookEntity {
+  bookId: number;
   isbn: number;
   title: string;
   author: string;

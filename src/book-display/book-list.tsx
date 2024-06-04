@@ -9,18 +9,20 @@ import Typography from '@mui/material/Typography';
 import CardMedia from '@mui/material/CardMedia';
 import { motion } from 'framer-motion';
 import Button from '@mui/material/Button';
+import { LoanDialog } from './../components/popup';
 
 function BookItem({
+  bookId,
   title,
   author,
   publisher,
   year,
   availableCopies,
   img,
-  descryption,
 }: BookEntity) {
   const [isImageLoaded, setImageLoaded] = useState(false);
   const [isClicked, setIsClicked] = useState(false);
+  const [showLoanDialog, handleLoanClick] = useState(false);
   const handleClick = () => {
     setIsClicked(true);
   };
@@ -71,9 +73,11 @@ function BookItem({
             </Typography>
           </CardContent>
           <Box visibility={isClicked ? 'visible' : 'hidden'}>
-            <Button variant="contained" color="inherit">
-              Loan
-            </Button>
+            <LoanDialog
+              id={bookId}
+              open={showLoanDialog}
+              onClose={() => handleLoanClick(false)}
+            />
           </Box>
         </Box>
       </motion.div>
