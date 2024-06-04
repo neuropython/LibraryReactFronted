@@ -10,10 +10,17 @@ import {
 } from '@mui/material';
 import KeyboardArrowDown from '@mui/icons-material/KeyboardArrowDown';
 
-import { useState } from 'react';
+import React, { useEffect, useState } from 'react';
+
 import { useNavigate } from 'react-router-dom';
 
 export const MuiNavbar = () => {
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+  useEffect(() => {
+    const token = localStorage.getItem('token');
+    setIsLoggedIn(!!token);
+  }, []);
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);
   const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
@@ -25,30 +32,37 @@ export const MuiNavbar = () => {
   const navigate = useNavigate();
 
   return (
-    <>
-      <AppBar position="static">
-        <Toolbar>
-          <IconButton edge="start" color="inherit" aria-label="menu">
-            {/* <MenuIcon /> */}
-          </IconButton>
-          <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-            Library
-          </Typography>
-          <Stack direction="row" spacing={2}>
-            <Button color="inherit" onClick={() => navigate('/')}>
-              Home
-            </Button>
+    <AppBar position="sticky" sx={{ boxShadow: 'none' }}>
+      <Toolbar sx={{ justifyContent: 'center' }}>
+        <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
+          Library
+        </Typography>
+        <Stack direction="row" spacing={2}>
+          <Button color="inherit" onClick={() => navigate('/')}>
+            Home
+          </Button>
+          <Button
+            color="inherit"
+            id="resources-button"
+            onClick={handleClick}
+            aria-control={open ? 'resources-menu' : undefined}
+            aria-haspopup="true"
+            aria-expanded={open ? 'true' : undefined}
+            endIcon={<KeyboardArrowDown />}
+          >
+            Resources
+          </Button>
+          {isLoggedIn ? (
             <Button
               color="inherit"
-              id="resources-button"
-              onClick={handleClick}
-              aria-control={open ? 'resources-menu' : undefined}
-              aria-haspopup="true"
-              aria-expanded={open ? 'true' : undefined}
-              endIcon={<KeyboardArrowDown />}
+              onClick={() => {
+                handleClose();
+                navigate('/Me');
+              }}
             >
-              Resources
+              Me
             </Button>
+          ) : (
             <Button
               color="inherit"
               onClick={() => {
@@ -58,49 +72,49 @@ export const MuiNavbar = () => {
             >
               Login
             </Button>
-            <Button
-              color="inherit"
-              onClick={() => {
-                handleClose();
-                navigate('/Register');
-              }}
-            >
-              Register
-            </Button>
-            <Button
-              color="inherit"
-              onClick={() => {
-                handleClose();
-                navigate('/About');
-              }}
-            >
-              About
-            </Button>
-            <Button
-              color="inherit"
-              onClick={() => {
-                handleClose();
-                navigate('/Contact');
-              }}
-            >
-              Contact
-            </Button>
-          </Stack>
-          <Menu
-            id="resources-menu"
-            anchorEl={anchorEl}
-            open={open}
-            MenuListProps={{ 'aria-labelledby': 'resources-button' }}
-            onClose={() => setAnchorEl(null)}
-            anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}
-            transformOrigin={{ vertical: 'top', horizontal: 'right' }}
+          )}
+          <Button
+            color="inherit"
+            onClick={() => {
+              handleClose();
+              navigate('/Register');
+            }}
           >
-            <MenuItem onClick={() => navigate('/Books')}>Books</MenuItem>
-            <MenuItem onClick={() => navigate('/Comments')}>Comments</MenuItem>
-            <MenuItem onClick={() => navigate('/Loans')}>Loans</MenuItem>
-          </Menu>
-        </Toolbar>
-      </AppBar>
-    </>
+            Register
+          </Button>
+          <Button
+            color="inherit"
+            onClick={() => {
+              handleClose();
+              navigate('/About');
+            }}
+          >
+            About
+          </Button>
+          <Button
+            color="inherit"
+            onClick={() => {
+              handleClose();
+              navigate('/Contact');
+            }}
+          >
+            Contact
+          </Button>
+        </Stack>
+        <Menu
+          id="resources-menu"
+          anchorEl={anchorEl}
+          open={open}
+          MenuListProps={{ 'aria-labelledby': 'resources-button' }}
+          onClose={() => setAnchorEl(null)}
+          anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}
+          transformOrigin={{ vertical: 'top', horizontal: 'right' }}
+        >
+          <MenuItem onClick={() => navigate('/Books')}>Books</MenuItem>
+          <MenuItem onClick={() => navigate('/Comments')}>Comments</MenuItem>
+          <MenuItem onClick={() => navigate('/Loans')}>Loans</MenuItem>
+        </Menu>
+      </Toolbar>
+    </AppBar>
   );
 };

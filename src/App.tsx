@@ -13,7 +13,7 @@ import { UrlNotFound } from './pages/url-not-found';
 import { Loans } from './pages/loans';
 import { Comments } from './pages/comments';
 import { Home } from './pages/landing';
-
+import { Me } from './pages/me';
 const darkTheme = createTheme({
   palette: {
     mode: 'dark',
@@ -34,7 +34,7 @@ function App() {
         <Route path="/Books" element={<Book />} />
         <Route path="/Loans" element={<Loans />} />
         <Route path="/Comments" element={<Comments />} />
-
+        <Route path="/Me" element={<Me />} />
         <Route path="*" element={<UrlNotFound />} />
       </Routes>
     </ThemeProvider>

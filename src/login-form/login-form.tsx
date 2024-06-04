@@ -4,6 +4,8 @@ import LoginIcon from '@mui/icons-material/Login';
 import './login-form-style.css';
 import * as yup from 'yup';
 import React, { useMemo } from 'react';
+import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 interface FormValues {
   username: string;
@@ -35,15 +37,28 @@ export function LoginForm() {
   const onSubmit = (values: FormValues) => {
     console.log(values);
   };
+  const history = useNavigate();
 
   return (
     <div className="loginWrapper">
       <div>
         <Formik
-          initialValues={initialValues}
-          onSubmit={onSubmit}
-          validateOnChange
-          validationSchema={validationSchema}
+          initialValues={{ username: '', password: '' }}
+          onSubmit={(values, { setSubmitting }) => {
+            axios
+              .post('http://localhost:8080/api/auth/login', values)
+              .then((response) => {
+                localStorage.setItem('token', response.data.token);
+                setSubmitting(false);
+                console.log(response.data);
+                history('/');
+              })
+              .catch((error) => {
+                // handle error here
+                console.error(error);
+                setSubmitting(false);
+              });
+          }}
         >
           {(formik) => (
             <form

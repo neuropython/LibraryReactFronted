@@ -32,9 +32,15 @@ function BookListInvitation() {
         margin: '50px', // Increase margin
       }}
     >
-      <h1 style={{ marginBottom: '10px' }}>
+      <h2 style={{ marginBottom: '10px' }}>
         List of all books currently accessible
-      </h1>{' '}
+      </h2>{' '}
+      <h5 style={{ lineHeight: '1.2' }}>
+        Here is a list of all the books currently available in the library. Feel
+        free to browse and borrow any book you like. if you want to borrow a
+        book, click on book you are interested in and then click on the loan
+        button.
+      </h5>
     </div>
   );
 }
