@@ -7,31 +7,23 @@ import Carousel from 'react-material-ui-carousel';
 import CircularProgress from '@mui/material/CircularProgress';
 import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
-
-interface BookEntity {
-  isbn: number;
-  title: string;
-  author: string;
-  publisher: string;
-  year: string;
-  copies: number;
-  img_url: string;
-}
-
+import './book-interface';
+import CardMedia from '@mui/material/CardMedia';
 function BookItem({
   title,
   author,
   publisher,
   year,
-  copies,
-  img_url,
+  availableCopies,
+  img,
+  descryption,
 }: BookEntity) {
   const [isImageLoaded, setImageLoaded] = useState(false);
 
   return (
-    <Box component="section" sx={{ p: 2, border: '1px dashed grey' }}>
+    <Box component="section">
       <Grid container spacing={2}>
-        <Grid item xs={6}>
+        <Grid item xs={4}>
           <Card variant="outlined" id="cardView">
             <CardContent>
               <Typography variant="h5" component="h2" id="title">
@@ -45,24 +37,52 @@ function BookItem({
                 Year: {year}
               </Typography>
               <Typography variant="body2" component="p">
-                Copies: {copies}
+                Copies: {availableCopies}
               </Typography>
             </CardContent>
           </Card>
         </Grid>
-        <Grid item xs>
-          {!isImageLoaded && <CircularProgress />} {/* Loading spinner */}
-          <img
-            src={img_url}
+        <Grid
+          item
+          xs={4}
+          style={{
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center',
+          }}
+        >
+          <CardMedia
+            component="img"
+            image={img}
             onLoad={() => setImageLoaded(true)}
             alt={title}
-            style={{ width: '200px', height: '300px' }}
+            style={{ width: '180px', height: '255px' }}
           />
+        </Grid>
+        <Grid item xs={4}>
+          <Card variant="outlined" id="cardView">
+            <Typography
+              variant="h5"
+              component="h2"
+              id="title"
+              style={{
+                maxHeight: '300px',
+                overflowY: 'auto',
+                direction: 'rtl',
+                padding: '10px',
+              }}
+            >
+              <div style={{ direction: 'ltr', fontFamily: 'Calibri' }}>
+                {descryption}
+              </div>
+            </Typography>
+          </Card>
         </Grid>
       </Grid>
     </Box>
   );
 }
+
 function displayBooksList({ bookList }: { bookList: BookEntity[] }) {
   return (
     <div id="carouselView">

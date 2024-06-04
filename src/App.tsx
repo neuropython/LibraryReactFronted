@@ -19,12 +19,7 @@ const darkTheme = createTheme({
     mode: 'dark',
   },
 });
-const bookList = mock.bookList.map((book) => ({
-  ...book,
-}));
-
 function App() {
-  console.log(bookList);
   return (
     <ThemeProvider theme={darkTheme}>
       <CssBaseline />
