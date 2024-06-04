@@ -41,7 +41,13 @@ export default class LoansController extends React.Component<{}, State> {
 
   render() {
     return (
-      <div>
+      <div
+        style={{
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'center',
+        }}
+      >
         <h1>My Loans</h1>
         <LoansDisplay />
       </div>

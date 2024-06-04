@@ -14,12 +14,6 @@ interface FormValues {
 }
 
 export function LoginForm() {
-  const initialValues: FormValues = {
-    username: '',
-    password: '',
-    rememberMe: false,
-  };
-
   const validationSchema = useMemo(
     () =>
       yup.object().shape({
@@ -46,7 +40,7 @@ export function LoginForm() {
           initialValues={{ username: '', password: '' }}
           onSubmit={(values, { setSubmitting }) => {
             axios
-              .post('http://localhost:8080/api/auth/login', values)
+              .post('http://localhost:8080/api/auth/register', values)
               .then((response) => {
                 localStorage.setItem('token', response.data.token);
                 setSubmitting(false);

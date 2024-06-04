@@ -8,7 +8,7 @@ import { About } from './pages/about';
 import { Book } from './pages/book';
 import { Contact } from './pages/conatact';
 import { LoginForm } from './login-form/login-form';
-import { Register } from './login-form/register-form';
+import { RegisterForm } from './login-form/register-form';
 import { UrlNotFound } from './pages/url-not-found';
 import LoansControler from './pages/loans';
 import { Comments } from './pages/comments';
@@ -28,7 +28,7 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/About" element={<About />} />
         <Route path="/Login" element={<LoginForm />} />
-        <Route path="/Register" element={<Register />} />
+        <Route path="/Register" element={<RegisterForm />} />
         <Route path="/Contact" element={<Contact />} />
 
         <Route path="/Books" element={<Book />} />
