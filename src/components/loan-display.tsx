@@ -9,13 +9,33 @@ import {
 import { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 import { Grid } from '@mui/material';
+import CenteredCircularProgress from '../components/CircularProgress';
 
 import Loan from './../interfaces/loan-interface';
+import { c } from 'tar';
+import { Button } from 'antd';
 interface LoanCardProps {
   loan: Loan;
+  isAdmin: boolean;
 }
 
-const LoanCard: React.FC<LoanCardProps> = ({ loan }) => {
+function deleteLoan(loanId: number) {
+  const token = localStorage.getItem('token');
+  fetch(`http://localhost:8080/loans/${loanId}`, {
+    method: 'DELETE',
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  }).then((response) => {
+    if (response.ok) {
+      console.log('Loan deleted');
+    } else {
+      console.error('Error:', response);
+    }
+  });
+}
+
+const LoanCard: React.FC<LoanCardProps> = ({ loan, isAdmin }) => {
   const [isImageLoaded, setImageLoaded] = useState(false);
   const [isClicked, setIsClicked] = useState(false);
 
@@ -29,7 +49,7 @@ const LoanCard: React.FC<LoanCardProps> = ({ loan }) => {
 
   return (
     <Grid container spacing={2} margin={5}>
-      <Card style={{ borderRadius: '15px', padding: '10px' }}>
+      <Card style={{ borderRadius: '15px' }}>
         <Box
           display="flex"
           alignItems="center"
@@ -63,6 +83,28 @@ const LoanCard: React.FC<LoanCardProps> = ({ loan }) => {
             <Typography variant="body2" align="center">
               Due Date: {new Date(loan.dueDate).toLocaleDateString()}
             </Typography>
+            <Typography variant="body2" align="center">
+              User: {loan.user.name}
+            </Typography>
+            {isAdmin && (
+              <Typography variant="body2" align="center">
+                Email: {loan.user.email_to_user}
+              </Typography>
+            )}
+            {isAdmin && (
+              <Button
+                color="inherit" // Adjust the type to match Ant Design's API for button color
+                onClick={() => deleteLoan(loan.loanId)}
+                style={{
+                  margin: '10px',
+                  display: 'block',
+                  marginLeft: 'auto',
+                  marginRight: 'auto',
+                }}
+              >
+                Delete
+              </Button>
+            )}
           </CardContent>
         </Box>
       </Card>
@@ -72,23 +114,75 @@ const LoanCard: React.FC<LoanCardProps> = ({ loan }) => {
 
 function LoansDisplay() {
   const [loans, setLoans] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
+  const role = localStorage.getItem('role');
+  const token = localStorage.getItem('token');
+  const isAdmin = role === 'ROLE_ADMIN';
   useEffect(() => {
-    const token = localStorage.getItem('token');
-    fetch('http://localhost:8080/loans/mine', {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    })
-      .then((response) => response.json())
-      .then((data) => setLoans(data))
-      .catch((error) => {
-        console.error('Error:', error);
-      });
+    if (role === 'ROLE_ADMIN') {
+      fetch('http://localhost:8080/loans/all', {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
+        .then((response) => response.json())
+        .then((data) => {
+          setLoans(data);
+          setIsLoading(false);
+        })
+        .catch((error) => {
+          console.error('Error:', error);
+        });
+    } else {
+      fetch('http://localhost:8080/loans/mine', {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
+        .then((response) => response.json())
+        .then((data) => setLoans(data))
+        .catch((error) => {
+          console.error('Error:', error);
+        });
+    }
   });
+
+  if (isLoading) {
+    return <CenteredCircularProgress />;
+  }
+
   return (
-    <div>
-      {loans &&
-        loans.map((loan: Loan) => <LoanCard loan={loan} key={loan.loanId} />)}
+    <div
+      style={{
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        gap: '50px',
+      }}
+    >
+      <h1
+        style={{
+          lineHeight: '1.2',
+          fontSize: '4rem',
+          textAlign: 'center',
+          fontFamily: "'Poppins', sans-serif",
+        }}
+      >
+        MyLoans
+      </h1>
+      <div
+        style={{
+          display: 'flex',
+          flexDirection: 'row',
+          alignItems: 'center',
+          justifyContent: 'center',
+        }}
+      >
+        {loans &&
+          loans.map((loan: Loan) => (
+            <LoanCard loan={loan} key={loan.loanId} isAdmin={isAdmin} />
+          ))}
+      </div>
     </div>
   );
 }

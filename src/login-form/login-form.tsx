@@ -2,32 +2,10 @@ import { Formik, Field, ErrorMessage } from 'formik';
 import { Button, TextField } from '@mui/material';
 import LoginIcon from '@mui/icons-material/Login';
 import './login-form-style.css';
-import * as yup from 'yup';
-import React, { useMemo } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 
-interface FormValues {
-  username: string;
-  password: string;
-  rememberMe: boolean;
-}
-
 export function LoginForm() {
-  const validationSchema = useMemo(
-    () =>
-      yup.object().shape({
-        password: yup
-          .string()
-          .required('Required')
-          .matches(/\d/, 'Add number')
-          .matches(/[!@#$%^&*(),.?":{}|<>]/, 'Add special character')
-          .matches(/[a-zA-Z]/, 'Add char'),
-        username: yup.string().required('Required'),
-      }),
-    [],
-  );
-
   const history = useNavigate();
 
   return (
@@ -40,6 +18,7 @@ export function LoginForm() {
               .post('http://localhost:8080/api/auth/login', values)
               .then((response) => {
                 localStorage.setItem('token', response.data.token);
+                localStorage.setItem('role', response.data.role);
                 setSubmitting(false);
                 console.log(response.data);
                 history('/');

@@ -15,6 +15,7 @@ import { Comments } from './pages/comments';
 import { Home } from './pages/landing';
 import { Me } from './pages/me';
 import { SelectedBook } from './pages/selected-book';
+import LoansDisplay from './components/loan-display';
 const darkTheme = createTheme({
   palette: {
     mode: 'dark',
@@ -33,7 +34,7 @@ function App() {
         <Route path="/Contact" element={<Contact />} />
 
         <Route path="/Books" element={<Book />} />
-        <Route path="/Loans" element={<LoansControler />} />
+        <Route path="/Loans" element={<LoansDisplay />} />
         <Route path="/Comments" element={<Comments />} />
         <Route path="/Me" element={<Me />} />
         <Route path="*" element={<UrlNotFound />} />

@@ -14,31 +14,6 @@ export default class LoansController extends React.Component<{}, State> {
     };
   }
 
-  componentDidMount() {
-    const token = localStorage.getItem('token');
-    axios
-      .get('http://localhost:8080/loans/mine', {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      })
-      .then((response) => {
-        this.setState({ loans: response.data });
-      })
-      .catch((error) => {
-        if (error.response) {
-          console.log(error.response.data);
-          console.log(error.response.status);
-          console.log(error.response.headers);
-        } else if (error.request) {
-          console.log(error.request);
-        } else {
-          console.log('Error', error.message);
-        }
-        console.log(error.config);
-      });
-  }
-
   render() {
     return (
       <div

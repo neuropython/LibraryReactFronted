@@ -16,6 +16,10 @@ import { useParams } from 'react-router-dom';
 import StarIcon from '@mui/icons-material/Star';
 import axios from 'axios';
 import CenteredCircularProgress from '../components/CircularProgress';
+import { red } from '@mui/material/colors';
+import EditIcon from '@mui/icons-material/Edit';
+import IconButton from '@mui/material/IconButton';
+
 interface ReviewEntity {
   reviewId: number;
   review: string;
@@ -23,16 +27,13 @@ interface ReviewEntity {
   user: {
     name: string;
   };
+  isAdmin: boolean;
 }
 
-function SelectedBookDisplay({
-  title,
-  author,
-  publisher,
-  year,
-  availableCopies,
-  img,
-}: BookEntity) {
+function SelectedBookDisplay(
+  { bookId, title, author, publisher, year, availableCopies, img }: BookEntity,
+  isAdmin: boolean,
+) {
   return (
     <Grid
       container
@@ -89,7 +90,11 @@ function SelectedBookDisplay({
     </Grid>
   );
 }
-function ReviewDisplay({ review, rating, user }: ReviewEntity) {
+
+function ReviewDisplay(
+  { reviewId, review, rating, user }: ReviewEntity,
+  isAdmin: boolean,
+) {
   const userName = user.name || 'Anonymous';
 
   const getGradient = (rating: number) => {
@@ -155,6 +160,23 @@ function ReviewDisplay({ review, rating, user }: ReviewEntity) {
         >
           {review}
         </Typography>
+        {isAdmin && (
+          <div
+            style={{
+              display: 'flex',
+              justifyContent: 'center',
+              alignItems: 'center',
+            }}
+          >
+            <Button
+              variant="contained"
+              color="inherit"
+              onClick={() => deleteReview(reviewId)}
+            >
+              Delete
+            </Button>
+          </div>
+        )}
       </CardContent>
     </Card>
   );
@@ -222,6 +244,39 @@ function addReview(id: number) {
     </Box>
   );
 }
+function deleteReview(reviewId: number) {
+  const token = localStorage.getItem('token');
+  axios
+    .delete(`http://localhost:3000/reviews/${reviewId}`, {
+      headers: { Authorization: `Bearer ${token}` },
+    })
+    .then((response) => {
+      console.log(response.data);
+      window.location.reload();
+    })
+    .catch((error) => {
+      console.error('There was an error!', error);
+    });
+}
+
+function ChangeItem(bookId: number, changeItem: any, field: string) {
+  const token = localStorage.getItem('token');
+  axios
+    .patch(
+      `http://localhost:3000/book/update/${bookId}`,
+
+      { changeItem, field },
+
+      { headers: { Authorization: `Bearer ${token}` } },
+    )
+    .then((response) => {
+      console.log(response.data);
+      window.location.reload();
+    })
+    .catch((error) => {
+      console.error('There was an error!', error);
+    });
+}
 
 export function SelectedBook() {
   const { isbn } = useParams();
@@ -230,7 +285,13 @@ export function SelectedBook() {
   const [id, bookId] = useState(0);
   const [comments, setComments] = useState<ReviewEntity[]>([]);
   const [loading, setLoading] = useState(true);
+  const [isAdmin, setIsAdmin] = useState(false);
+
   useEffect(() => {
+    const role = localStorage.getItem('role');
+    if (role === 'ROLE_ADMIN') {
+      setIsAdmin(true);
+    }
     const fetchData = async () => {
       setLoading(true);
       // Fetch book details
@@ -262,7 +323,7 @@ export function SelectedBook() {
   }
   return (
     <div>
-      {book && <SelectedBookDisplay {...book} />}
+      {book && <SelectedBookDisplay {...book} isAdmin={isAdmin} />}
       <style>
         {`
     /* Style for webkit-based browsers */
@@ -292,7 +353,7 @@ export function SelectedBook() {
       >
         {comments.map((comment) => (
           <div key={comment.reviewId} style={{ minWidth: '300px' }}>
-            {comment && <ReviewDisplay {...comment} />}
+            {comment && <ReviewDisplay {...comment} isAdmin={isAdmin} />}{' '}
           </div>
         ))}
       </div>

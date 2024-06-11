@@ -14,8 +14,16 @@ function Invitation() {
         margin: '50px', // Increase margin
       }}
     >
-      <h1 style={{ marginBottom: '10px' }}>Books</h1>{' '}
-      <h5 style={{ lineHeight: '1.2' }}>
+      <h1
+        style={{
+          marginBottom: '10px',
+          fontFamily: "'Poppins', sans-serif",
+          fontSize: '5rem',
+        }}
+      >
+        Books
+      </h1>{' '}
+      <h5 style={{ lineHeight: '1.2', fontSize: '2rem', textAlign: 'center' }}>
         Welcome to the library! Here are 10 of the most popular books available
       </h5>
     </div>
@@ -32,13 +40,13 @@ function BookListInvitation() {
         margin: '50px', // Increase margin
       }}
     >
-      <h2 style={{ marginBottom: '10px' }}>
+      <h2 style={{ lineHeight: '1.2', fontSize: '4rem', textAlign: 'center' }}>
         List of all books currently accessible
       </h2>{' '}
-      <h5 style={{ lineHeight: '1.2' }}>
+      <h5 style={{ lineHeight: '1.2', fontSize: '2rem', textAlign: 'center' }}>
         Here is a list of all the books currently available in the library. Feel
         free to browse and borrow any book you like. if you want to borrow a
-        book, click on book you are interested in and then click0 the loan
+        book, click on book you are interested in and then click the loan
         button.
       </h5>
     </div>

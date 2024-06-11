@@ -15,9 +15,14 @@ import { useNavigate } from 'react-router-dom';
 
 export const MuiNavbar = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [isAdmin, setIsAdmin] = useState(false);
 
   useEffect(() => {
     const token = localStorage.getItem('token');
+    const role = localStorage.getItem('role');
+    if (role === 'ROLE_ADMIN') {
+      setIsAdmin(true);
+    }
     setIsLoggedIn(!!token);
   }, []);
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
@@ -36,6 +41,11 @@ export const MuiNavbar = () => {
         <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
           Library
         </Typography>
+        {isAdmin ? (
+          <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
+            Admin
+          </Typography>
+        ) : null}
         <Stack direction="row" spacing={2}>
           <Button color="inherit" onClick={() => navigate('/')}>
             Home
@@ -110,7 +120,6 @@ export const MuiNavbar = () => {
           transformOrigin={{ vertical: 'top', horizontal: 'right' }}
         >
           <MenuItem onClick={() => navigate('/Books')}>Books</MenuItem>
-          <MenuItem onClick={() => navigate('/Comments')}>Comments</MenuItem>
           <MenuItem onClick={() => navigate('/Loans')}>Loans</MenuItem>
         </Menu>
       </Toolbar>

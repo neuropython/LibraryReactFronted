@@ -8,7 +8,6 @@ import CardContent from '@mui/material/CardContent';
 import Typography from '@mui/material/Typography';
 import CardMedia from '@mui/material/CardMedia';
 import { motion } from 'framer-motion';
-import Button from '@mui/material/Button';
 import { LoanDialog } from './../components/popup';
 import { ButtonBase } from '@mui/material';
 import { useNavigate } from 'react-router-dom';

@@ -8,4 +8,5 @@ interface BookEntity {
   availableCopies: number;
   img: string;
   descryption: string;
+  isAdmin: boolean;
 }
