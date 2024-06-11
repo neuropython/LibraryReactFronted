@@ -10,7 +10,6 @@ import { Contact } from './pages/conatact';
 import { LoginForm } from './login-form/login-form';
 import { RegisterForm } from './login-form/register-form';
 import { UrlNotFound } from './pages/url-not-found';
-import LoansControler from './pages/loans';
 import { Comments } from './pages/comments';
 import { Home } from './pages/landing';
 import { Me } from './pages/me';

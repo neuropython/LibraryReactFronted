@@ -8,6 +8,7 @@ import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
 import './book-interface';
 import CardMedia from '@mui/material/CardMedia';
+import { useTranslation } from 'react-i18next';
 
 function BookItem({
   title,
@@ -18,6 +19,7 @@ function BookItem({
   img,
   descryption,
 }: BookEntity) {
+  const [t, i18n] = useTranslation('global');
   const [isImageLoaded, setImageLoaded] = useState(false);
 
   return (
@@ -31,13 +33,13 @@ function BookItem({
               </Typography>
               <Typography color="textSecondary">{author}</Typography>
               <Typography variant="body2" component="p">
-                Publisher: {publisher}
+                {t('publisher')}: {publisher}
               </Typography>
               <Typography variant="body2" component="p">
-                Year: {year}
+                {t('year')}: {year}
               </Typography>
               <Typography variant="body2" component="p">
-                Copies: {availableCopies}
+                {t('copies')}: {availableCopies}
               </Typography>
             </CardContent>
           </Card>

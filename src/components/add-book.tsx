@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { TextField, Button, Grid } from '@mui/material';
 import axios, { AxiosError } from 'axios';
+import { useTranslation } from 'react-i18next';
+
 interface BookEntity {
   isbn: number;
   title: string;
@@ -23,6 +25,7 @@ const AddBookForm: React.FC = () => {
     img: '',
     descryption: '',
   });
+  const [t, i18n] = useTranslation('global');
 
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
@@ -85,7 +88,7 @@ const AddBookForm: React.FC = () => {
           fullWidth
           type="text"
           name="isbn"
-          label="ISBN"
+          label={t('isbn')}
           variant="outlined"
           value={bookData.isbn}
           onChange={handleChange}
@@ -96,7 +99,7 @@ const AddBookForm: React.FC = () => {
           fullWidth
           type="text"
           name="title"
-          label="Title"
+          label={t('title')}
           variant="outlined"
           value={bookData.title}
           onChange={handleChange}
@@ -107,7 +110,7 @@ const AddBookForm: React.FC = () => {
           fullWidth
           type="text"
           name="author"
-          label="Author"
+          label={t('author')}
           variant="outlined"
           value={bookData.author}
           onChange={handleChange}
@@ -118,7 +121,7 @@ const AddBookForm: React.FC = () => {
           fullWidth
           type="text"
           name="publisher"
-          label="Publisher"
+          label={t('publisher')}
           variant="outlined"
           value={bookData.publisher}
           onChange={handleChange}
@@ -129,7 +132,7 @@ const AddBookForm: React.FC = () => {
           fullWidth
           type="text"
           name="year"
-          label="Year"
+          label={t('year')}
           variant="outlined"
           value={bookData.year}
           onChange={handleChange}
@@ -140,7 +143,7 @@ const AddBookForm: React.FC = () => {
           fullWidth
           type="number"
           name="availableCopies"
-          label="Available Copies"
+          label={t('availableCopies')}
           variant="outlined"
           value={bookData.availableCopies}
           onChange={handleChange}
@@ -151,7 +154,7 @@ const AddBookForm: React.FC = () => {
           fullWidth
           type="text"
           name="img"
-          label="Image URL"
+          label={t('Image URL')}
           variant="outlined"
           value={bookData.img}
           onChange={handleChange}
@@ -161,7 +164,7 @@ const AddBookForm: React.FC = () => {
         <TextField
           fullWidth
           name="descryption"
-          label="descryption"
+          label={t('description')}
           multiline
           rows={4}
           variant="outlined"
@@ -171,7 +174,7 @@ const AddBookForm: React.FC = () => {
       </Grid>
       <Grid item xs={12}>
         <Button type="submit" variant="contained" sx={{ m: 1 }}>
-          Add Book
+          {t('addBook')}
         </Button>
       </Grid>
     </Grid>

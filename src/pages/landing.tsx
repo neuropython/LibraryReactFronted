@@ -2,7 +2,7 @@ import { Box, Grid, Stack, Typography } from '@mui/material';
 import React from 'react';
 import { ReactComponent as BookIcon } from '../assets/book.svg';
 import { styled, keyframes } from '@mui/system';
-
+import { useTranslation } from 'react-i18next';
 
 const float = keyframes`
   0% {
@@ -28,6 +28,8 @@ const StyledBox = styled(Box)(({ theme }) => ({
 }));
 
 function HeroSection() {
+  const [t, i18n] = useTranslation('global');
+
   const LeftContent = (
     <Grid
       item
@@ -51,22 +53,24 @@ function HeroSection() {
       xs={12}
       justifyContent="center"
       alignItems="center"
-
     >
-<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins&display=swap" />
-<Typography variant="h2" component="div" align="center" fontFamily="'Poppins', sans-serif">
-  Welcome to Library
-</Typography>
+      <link
+        rel="stylesheet"
+        href="https://fonts.googleapis.com/css?family=Poppins&display=swap"
+      />
+      <Typography
+        variant="h2"
+        component="div"
+        align="center"
+        fontFamily="'Poppins', sans-serif"
+      >
+        <p>{t('landingPage.welcomeMessage')}</p>
+      </Typography>
     </Grid>
   );
 
   return (
-    
-    <Grid
-      container
-      spacing={2}
-      sx={{ flexGrow: 1 }}
-    >
+    <Grid container spacing={2} sx={{ flexGrow: 1 }}>
       {LeftContent}
       {RightContent}
     </Grid>

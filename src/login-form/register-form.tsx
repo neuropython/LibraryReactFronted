@@ -7,6 +7,7 @@ import React, { useMemo } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { name } from 'tar/dist/commonjs/types';
+import { useTranslation } from 'react-i18next';
 
 interface FormValues {
   username: string;
@@ -15,6 +16,7 @@ interface FormValues {
 }
 
 export function RegisterForm() {
+  const [t, i18n] = useTranslation('global');
   const validationSchema = useMemo(
     () =>
       yup.object().shape({
@@ -77,7 +79,7 @@ export function RegisterForm() {
                 name="username"
                 type="text"
                 as={TextField}
-                label="Login"
+                label={t('login')}
                 variant="standard"
                 onBlur={formik.handleBlur}
                 helperText={<ErrorMessage name="username" />}
@@ -89,7 +91,7 @@ export function RegisterForm() {
                 name="password"
                 type="password"
                 as={TextField}
-                label="Password"
+                label={t('password')}
                 variant="standard"
                 onBlur={formik.handleBlur}
                 helperText={<ErrorMessage name="password" />}
@@ -101,7 +103,7 @@ export function RegisterForm() {
                 name="email"
                 type="email"
                 as={TextField}
-                label="Email"
+                label={t('email')}
                 variant="standard"
                 onBlur={formik.handleBlur}
                 helperText={<ErrorMessage name="email" />}
@@ -111,7 +113,7 @@ export function RegisterForm() {
                 name="name"
                 type="text"
                 as={TextField}
-                label="Name"
+                label={t('name')}
                 variant="standard"
                 onBlur={formik.handleBlur}
                 helperText={<ErrorMessage name="name" />}
@@ -129,7 +131,7 @@ export function RegisterForm() {
                   !formik.touched.username
                 }
               >
-                Register
+                {t('register')}
               </Button>
             </form>
           )}

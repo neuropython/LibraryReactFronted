@@ -14,6 +14,8 @@ import CenteredCircularProgress from '../components/CircularProgress';
 import Loan from './../interfaces/loan-interface';
 import { c } from 'tar';
 import { Button } from 'antd';
+import { useTranslation } from 'react-i18next';
+
 interface LoanCardProps {
   loan: Loan;
   isAdmin: boolean;
@@ -21,6 +23,7 @@ interface LoanCardProps {
 
 function deleteLoan(loanId: number) {
   const token = localStorage.getItem('token');
+
   fetch(`http://localhost:8080/loans/${loanId}`, {
     method: 'DELETE',
     headers: {
@@ -39,6 +42,7 @@ function deleteLoan(loanId: number) {
 const LoanCard: React.FC<LoanCardProps> = ({ loan, isAdmin }) => {
   const [isImageLoaded, setImageLoaded] = useState(false);
   const [isClicked, setIsClicked] = useState(false);
+  const [t, i18n] = useTranslation('global');
 
   const handleClick = () => {
     setIsClicked(true);
@@ -79,17 +83,17 @@ const LoanCard: React.FC<LoanCardProps> = ({ loan, isAdmin }) => {
               {loan.book.author}
             </Typography>
             <Typography variant="body2" align="center">
-              Loan Date: {new Date(loan.loanDate).toLocaleDateString()}
+              {t('loanDate')} {new Date(loan.loanDate).toLocaleDateString()}
             </Typography>
             <Typography variant="body2" align="center">
-              Due Date: {new Date(loan.dueDate).toLocaleDateString()}
+              {t('dueDate')} {new Date(loan.dueDate).toLocaleDateString()}
             </Typography>
             <Typography variant="body2" align="center">
-              User: {loan.user.name}
+              {t('user')} {loan.user.name}
             </Typography>
             {isAdmin && (
               <Typography variant="body2" align="center">
-                Email: {loan.user.email_to_user}
+                {t('email')} {loan.user.email_to_user}
               </Typography>
             )}
             {isAdmin && (
@@ -103,7 +107,7 @@ const LoanCard: React.FC<LoanCardProps> = ({ loan, isAdmin }) => {
                   marginRight: 'auto',
                 }}
               >
-                Delete
+                {t('delete')}
               </Button>
             )}
           </CardContent>

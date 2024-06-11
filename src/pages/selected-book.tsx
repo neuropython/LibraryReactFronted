@@ -19,6 +19,7 @@ import CenteredCircularProgress from '../components/CircularProgress';
 import { red } from '@mui/material/colors';
 import EditIcon from '@mui/icons-material/Edit';
 import IconButton from '@mui/material/IconButton';
+import { useTranslation } from 'react-i18next';
 
 interface ReviewEntity {
   reviewId: number;
@@ -68,10 +69,10 @@ function SelectedBookDisplay(
               {publisher}
             </Typography>
             <Typography variant="h4" component="p">
-              Year: {year}
+              {year}
             </Typography>
             <Typography variant="h4" component="p">
-              Copies: {availableCopies}
+              {availableCopies}
             </Typography>
           </CardContent>
         </Card>
@@ -96,6 +97,7 @@ function ReviewDisplay(
   isAdmin: boolean,
 ) {
   const userName = user.name || 'Anonymous';
+  const [t, i18n] = useTranslation('global');
 
   const getGradient = (rating: number) => {
     switch (rating) {
@@ -173,7 +175,7 @@ function ReviewDisplay(
               color="inherit"
               onClick={() => deleteReview(reviewId)}
             >
-              Delete
+              {t('delete')}
             </Button>
           </div>
         )}
@@ -182,9 +184,12 @@ function ReviewDisplay(
   );
 }
 
-function addReview(id: number) {
+function AddReview(id: number) {
+  const [t, i18n] = useTranslation('global');
+
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
+
     if (!event.currentTarget) return;
     const form = event.currentTarget;
     const rating = form.rating.value;
@@ -220,11 +225,11 @@ function addReview(id: number) {
   return (
     <Box sx={{ '& > :not(style)': { m: 1 } }}>
       <Typography variant="h4" gutterBottom>
-        Add a Review
+        {t('addReview')}
       </Typography>
       <form onSubmit={handleSubmit}>
         <TextField
-          label="Review"
+          label={t('review')}
           name="review"
           variant="outlined"
           fullWidth
@@ -238,7 +243,7 @@ function addReview(id: number) {
           margin="normal"
         />
         <Button type="submit" variant="contained" color="primary">
-          Submit
+          {t('submit')}
         </Button>
       </form>
     </Box>
@@ -358,7 +363,7 @@ export function SelectedBook() {
         ))}
       </div>
       <Box sx={{ margin: 4 }}>
-        <div>{addReview(id)}</div>
+        <div>{AddReview(id)}</div>
       </Box>
     </div>
   );

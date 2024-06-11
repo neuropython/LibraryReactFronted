@@ -4,9 +4,11 @@ import LoginIcon from '@mui/icons-material/Login';
 import './login-form-style.css';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 
 export function LoginForm() {
   const history = useNavigate();
+  const [t, i18n] = useTranslation('global');
 
   return (
     <div className="loginWrapper">
@@ -40,7 +42,7 @@ export function LoginForm() {
                 name="username"
                 type="text"
                 as={TextField}
-                label="Login"
+                label={t('login')}
                 variant="standard"
                 onBlur={formik.handleBlur}
                 helperText={<ErrorMessage name="username" />}
@@ -52,7 +54,7 @@ export function LoginForm() {
                 name="password"
                 type="password"
                 as={TextField}
-                label="Password"
+                label={t('password')}
                 variant="standard"
                 onBlur={formik.handleBlur}
                 helperText={<ErrorMessage name="password" />}
@@ -72,7 +74,7 @@ export function LoginForm() {
                   !formik.touched.username
                 }
               >
-                Login
+                {t('loginButton')}
               </Button>
             </form>
           )}

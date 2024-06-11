@@ -12,6 +12,7 @@ import { LoanDialog } from './../components/popup';
 import { ButtonBase } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
+import { useTranslation } from 'react-i18next';
 
 function BookItem({
   bookId,
@@ -23,6 +24,8 @@ function BookItem({
   img,
   isbn,
 }: BookEntity) {
+  const [t, i18n] = useTranslation('global');
+
   const navigate = useNavigate();
   const [isImageLoaded, setImageLoaded] = useState(false);
   const [isClicked, setIsClicked] = useState(false);
@@ -79,7 +82,7 @@ function BookItem({
               {year}
             </Typography>
             <Typography variant="body2" align="center">
-              Copies: {availableCopies}
+              {t('copies')} {availableCopies}
             </Typography>
             <Box display="flex" justifyContent="center" alignItems="center">
               <ArrowDropDownIcon />

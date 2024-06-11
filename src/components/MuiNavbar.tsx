@@ -13,13 +13,17 @@ import React, { useEffect, useState } from 'react';
 
 import { useNavigate } from 'react-router-dom';
 
+import { useTranslation } from 'react-i18next';
+
 export const MuiNavbar = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [isAdmin, setIsAdmin] = useState(false);
+  const [t, i18n] = useTranslation('global');
 
   useEffect(() => {
     const token = localStorage.getItem('token');
     const role = localStorage.getItem('role');
+
     if (role === 'ROLE_ADMIN') {
       setIsAdmin(true);
     }
@@ -39,16 +43,16 @@ export const MuiNavbar = () => {
     <AppBar position="sticky" sx={{ boxShadow: 'none' }}>
       <Toolbar sx={{ justifyContent: 'center' }}>
         <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-          Library
+          {t('library')}
         </Typography>
         {isAdmin ? (
           <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-            Admin
+            {t('admin')}
           </Typography>
         ) : null}
         <Stack direction="row" spacing={2}>
           <Button color="inherit" onClick={() => navigate('/')}>
-            Home
+            {t('home')}
           </Button>
           <Button
             color="inherit"
@@ -59,7 +63,7 @@ export const MuiNavbar = () => {
             aria-expanded={open ? 'true' : undefined}
             endIcon={<KeyboardArrowDown />}
           >
-            Resources
+            {t('resources')}
           </Button>
           {isLoggedIn ? (
             <Button
@@ -69,7 +73,7 @@ export const MuiNavbar = () => {
                 navigate('/Me');
               }}
             >
-              Me
+              {t('me')}
             </Button>
           ) : (
             <Button
@@ -79,7 +83,7 @@ export const MuiNavbar = () => {
                 navigate('/Login');
               }}
             >
-              Login
+              {t('login')}
             </Button>
           )}
           <Button
@@ -89,7 +93,7 @@ export const MuiNavbar = () => {
               navigate('/Register');
             }}
           >
-            Register
+            {t('register')}
           </Button>
           <Button
             color="inherit"
@@ -98,7 +102,7 @@ export const MuiNavbar = () => {
               navigate('/About');
             }}
           >
-            About
+            {t('about')}
           </Button>
           <Button
             color="inherit"
@@ -107,7 +111,7 @@ export const MuiNavbar = () => {
               navigate('/Contact');
             }}
           >
-            Contact
+            {t('contact')}
           </Button>
         </Stack>
         <Menu
@@ -119,8 +123,8 @@ export const MuiNavbar = () => {
           anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}
           transformOrigin={{ vertical: 'top', horizontal: 'right' }}
         >
-          <MenuItem onClick={() => navigate('/Books')}>Books</MenuItem>
-          <MenuItem onClick={() => navigate('/Loans')}>Loans</MenuItem>
+          <MenuItem onClick={() => navigate('/Books')}>{t('books')}</MenuItem>
+          <MenuItem onClick={() => navigate('/Loans')}>{t('loans')}</MenuItem>
         </Menu>
       </Toolbar>
     </AppBar>
