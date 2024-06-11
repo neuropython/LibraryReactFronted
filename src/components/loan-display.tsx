@@ -32,6 +32,7 @@ function deleteLoan(loanId: number) {
     } else {
       console.error('Error:', response);
     }
+    window.location.reload();
   });
 }
 
@@ -172,10 +173,12 @@ function LoansDisplay() {
       </h1>
       <div
         style={{
-          display: 'flex',
+          display: 'grid',
+
           flexDirection: 'row',
           alignItems: 'center',
           justifyContent: 'center',
+          maxWidth: '600px', // Adjust the height as needed
         }}
       >
         {loans &&

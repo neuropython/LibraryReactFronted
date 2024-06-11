@@ -4,11 +4,11 @@ import CardContent from '@mui/material/CardContent';
 import Typography from '@mui/material/Typography';
 import './book-display.css';
 import Carousel from 'react-material-ui-carousel';
-import CircularProgress from '@mui/material/CircularProgress';
 import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
 import './book-interface';
 import CardMedia from '@mui/material/CardMedia';
+
 function BookItem({
   title,
   author,

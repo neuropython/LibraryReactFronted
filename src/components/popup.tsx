@@ -66,21 +66,26 @@ export function LoanDialog({
           <Button
             onClick={() => {
               handleCloseDialog();
-              axios
-                .get('http://localhost:8080/users/me', {
-                  headers: {
-                    Authorization: `Bearer ${token}`,
-                  },
-                })
-                .then((response) => {
+              async function fetchUserData() {
+                try {
+                  const response = await axios.get(
+                    'http://localhost:8080/users/me',
+                    {
+                      headers: {
+                        Authorization: `Bearer ${token}`,
+                      },
+                    },
+                  );
                   const user_id = response.data;
                   setUserId(user_id);
-                  console.log('user_id');
-                  console.log(user_id); // or do something with the id
-                })
-                .catch((error) => {
+                  console.log('user_id', user_id); // Logging the user_id
+                } catch (error) {
                   console.error(error);
-                });
+                }
+              }
+
+              // Call fetchUserData at the appropriate time
+              fetchUserData();
               axios
                 .post(
                   'http://localhost:8080/loans/add',

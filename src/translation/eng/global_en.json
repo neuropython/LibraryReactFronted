@@ -1,0 +1,52 @@
+{
+  "title": "Title",
+  "author": "Author",
+  "publisher": "Publisher",
+  "year": "Year",
+  "availableCopies": "Copies",
+  "alt": "Image of",
+  "carouselView": "Carousel View",
+  "copies": "Copies",
+  "loanDialog": "Loan Dialog",
+  "isbn": "ISBN",
+  "img": "Image URL",
+  "description": "Description",
+  "addBook": "Add Book",
+  "pleaseFillAllFields": "Please fill all fields",
+  "bookAddedSuccessfully": "Book added successfully",
+  "errorAddingBook": "Error adding book",
+  "myLoans": "My Loans",
+  "loanDate": "Loan Date",
+  "dueDate": "Due Date",
+  "user": "User",
+  "email": "Email",
+  "delete": "Delete",
+  "loading": "Loading...",
+  "library": "Library",
+  "admin": "Admin",
+  "home": "Home",
+  "resources": "Resources",
+  "me": "Me",
+  "login": "Login",
+  "register": "Register",
+  "about": "About",
+  "contact": "Contact",
+  "books": "Books",
+  "loans": "Loans",
+  "password": "Password",
+  "loginButton": "Login",
+  "name": "Name",
+  "Invitation":
+  {
+    "heading": "Books",
+    "subheading": "Welcome to the library! Here are 10 of the most popular books available"
+  },
+  "BookListInvitation":
+  {
+    "heading": "List of all books currently accessible",
+    "subheading": "Here is a list of all the books currently available in the library. Feel free to browse and borrow any book you like. If you want to borrow a book, click on the book you are interested in and then click the loan button."
+  },
+    "addBookAdmin": "Add book - ADMIN",
+    "welcomeMessage": "Welcome to Library"
+
+}

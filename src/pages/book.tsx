@@ -3,7 +3,7 @@ import BookList from '../book-display/book-list';
 import { useEffect } from 'react';
 import { useState } from 'react';
 import axios from 'axios';
-
+import AddBookForm from '../components/add-book';
 function Invitation() {
   return (
     <div
@@ -55,7 +55,8 @@ function BookListInvitation() {
 
 export function Book() {
   const [bookList, setBookList] = useState([]);
-
+  const role = localStorage.getItem('role');
+  const isAdmin = role === 'ROLE_ADMIN';
   useEffect(() => {
     axios
       .get('http://localhost:8080/book/all')
@@ -91,6 +92,14 @@ export function Book() {
       <div>
         <BookList books={bookList} />
       </div>
+      <h2 style={{ lineHeight: '1.2', fontSize: '4rem', textAlign: 'center' }}>
+        Add book - ADMIN
+      </h2>
+      {isAdmin && (
+        <div style={{ flex: 'row' }}>
+          <AddBookForm />
+        </div>
+      )}
     </div>
   );
 }
