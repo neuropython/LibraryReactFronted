@@ -2,7 +2,6 @@ import './App.css';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
 import { MuiNavbar } from './components/MuiNavbar';
-import mock from './book-display/mock.json';
 import { Routes, Route } from 'react-router-dom';
 import { About } from './pages/about';
 import { Book } from './pages/book';

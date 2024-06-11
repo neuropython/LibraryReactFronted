@@ -64,7 +64,7 @@ function HeroSection() {
         align="center"
         fontFamily="'Poppins', sans-serif"
       >
-        <p>{t('landingPage.welcomeMessage')}</p>
+        <p>{t('welcomeMessage')}</p>
       </Typography>
     </Grid>
   );
