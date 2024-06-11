@@ -87,9 +87,8 @@ function LoansDisplay() {
   });
   return (
     <div>
-      {loans.map((loan: Loan) => (
-        <LoanCard loan={loan} key={loan.loanId} />
-      ))}
+      {loans &&
+        loans.map((loan: Loan) => <LoanCard loan={loan} key={loan.loanId} />)}
     </div>
   );
 }

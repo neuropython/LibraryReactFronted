@@ -14,6 +14,7 @@ import LoansControler from './pages/loans';
 import { Comments } from './pages/comments';
 import { Home } from './pages/landing';
 import { Me } from './pages/me';
+import { SelectedBook } from './pages/selected-book';
 const darkTheme = createTheme({
   palette: {
     mode: 'dark',
@@ -36,6 +37,7 @@ function App() {
         <Route path="/Comments" element={<Comments />} />
         <Route path="/Me" element={<Me />} />
         <Route path="*" element={<UrlNotFound />} />
+        <Route path="/book/:isbn" element={<SelectedBook />} />
       </Routes>
     </ThemeProvider>
   );

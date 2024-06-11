@@ -10,6 +10,9 @@ import CardMedia from '@mui/material/CardMedia';
 import { motion } from 'framer-motion';
 import Button from '@mui/material/Button';
 import { LoanDialog } from './../components/popup';
+import { ButtonBase } from '@mui/material';
+import { useNavigate } from 'react-router-dom';
+import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
 
 function BookItem({
   bookId,
@@ -19,7 +22,9 @@ function BookItem({
   year,
   availableCopies,
   img,
+  isbn,
 }: BookEntity) {
+  const navigate = useNavigate();
   const [isImageLoaded, setImageLoaded] = useState(false);
   const [isClicked, setIsClicked] = useState(false);
   const [showLoanDialog, handleLoanClick] = useState(false);
@@ -29,6 +34,10 @@ function BookItem({
   const handleBack = () => {
     setIsClicked(false);
   };
+  const handleImageClick = () => {
+    navigate(`/book/${isbn}`); // Assuming `id` is the book's id
+  };
+
   return (
     <Card style={{ borderRadius: '15px', padding: '10px' }}>
       <motion.div
@@ -44,13 +53,15 @@ function BookItem({
           onDoubleClick={handleBack}
         >
           {!isImageLoaded && <CircularProgress />} {/* Loading spinner */}
-          <CardMedia
-            component="img"
-            image={img}
-            onLoad={() => setImageLoaded(true)}
-            alt={title}
-            style={{ width: '180px', height: '255px' }}
-          />
+          <ButtonBase onClick={handleImageClick}>
+            <CardMedia
+              component="img"
+              image={img}
+              onLoad={() => setImageLoaded(true)}
+              alt={title}
+              style={{ width: '180px', height: '255px' }}
+            />
+          </ButtonBase>
           <CardContent>
             <Typography variant="h5" component="div" align="center">
               {title}
@@ -71,6 +82,9 @@ function BookItem({
             <Typography variant="body2" align="center">
               Copies: {availableCopies}
             </Typography>
+            <Box display="flex" justifyContent="center" alignItems="center">
+              <ArrowDropDownIcon />
+            </Box>
           </CardContent>
           <Box visibility={isClicked ? 'visible' : 'hidden'}>
             <LoanDialog

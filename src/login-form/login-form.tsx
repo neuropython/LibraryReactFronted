@@ -28,9 +28,6 @@ export function LoginForm() {
     [],
   );
 
-  const onSubmit = (values: FormValues) => {
-    console.log(values);
-  };
   const history = useNavigate();
 
   return (
@@ -40,7 +37,7 @@ export function LoginForm() {
           initialValues={{ username: '', password: '' }}
           onSubmit={(values, { setSubmitting }) => {
             axios
-              .post('http://localhost:8080/api/auth/register', values)
+              .post('http://localhost:8080/api/auth/login', values)
               .then((response) => {
                 localStorage.setItem('token', response.data.token);
                 setSubmitting(false);
